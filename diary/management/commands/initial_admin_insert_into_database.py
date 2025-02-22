@@ -1,4 +1,4 @@
-""" This script can be run from command line as 'python manage.py initial_admin_insert_into_db'
+""" This script can be run from command line as 'python manage.py initial_admin_insert_into_database'
     and it's inserting first nedded values for some Models which can be done also in Django Admin Section,
     but here it's more automatic and quikly"""
 from django.core.management.base import BaseCommand
