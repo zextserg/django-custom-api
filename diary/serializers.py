@@ -80,7 +80,31 @@ class EntrySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class EntryCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EntryCategory
+        fields = '__all__'
+
+
+class EntryTagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EntryTag
+        fields = '__all__'
+
+
 class JourneySerializer(serializers.ModelSerializer):
     class Meta:
         model = Journey
+        fields = '__all__'
+
+
+class JourneyTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = JourneyType
+        fields = '__all__'
+
+
+class JourneyCountrySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = JourneyCountry
         fields = '__all__'
