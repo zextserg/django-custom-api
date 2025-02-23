@@ -1,10 +1,10 @@
 # Django with custom Admin section and REST framework API
 
 ## Description
-It's a classic Django app for some "Diary" service, but with useful customisation for different use cases.
-In django Admin section it's for example - managing Many-To-Many relations in different ways, ability to Upload image/audio files through admin UI or through POST request as base64 value, and then ability to show images or listen audios in admin management system. 
-It's contains a djangorestframework API with representing of possible GET and POST requests to the service and with ability to test them on the main page.
-Also it contains a django management command wich can be run as bash command.
+It's a classic Django app for some "Diary" service, but with useful customisation for different use cases.  
+In django Admin section it's for example - managing Many-To-Many relations in different ways, ability to Upload image/audio files through admin UI or through POST request as base64 value, and then ability to show images or listen audios in admin management system.  
+It's contains a djangorestframework API with representing of possible GET and POST requests to the service and with ability to test them on the main page.  
+Also it contains a django management command wich can be run as bash command.  
 
 ## Diary app
 In Diary app every Diary User have several options how to fill his diary:  
