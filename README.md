@@ -1,16 +1,37 @@
-# Getting started with Django
+# Django with custom Admin section and REST framework API
 
-Adding new Test:
-1. Add new Question group (Django Admin)
-2. Add questions and choices of test (set order!) (Django Admin)
-3. Add timeline event template to App Achivements category with "Passed <group_name> test" name (Django Admin)
-4. Add new group to ConstSurveyVariables - set "group_name" & "group_id" as in Django (Xcode)
-5. Add new button (Xcode):
-5.1. Add button with tite on screen (Xcode Storyboard)
-5.2. Set class in properties - VarButton (Xcode Storyboard)
-5.3. Connect button to viewController in code - SelfExplorerViewController (Xcode Storyboard + Code)
-5.4. Set action to new button in SelfExplorerViewController (Xcode Code)
-5.5. Set button.value in func viewDidLoad() in SelfExplorerViewController (Xcode Code)
+## Description
+It's a classic Django app for some "Diary" service, but with useful customisation for different use cases.
+In django Admin section it's for example - managing Many-To-Many relations in different ways, ability to Upload image/audio files through admin UI or through POST request as base64 value, and then ability to show images or listen audios in admin management system. 
+It's contains a djangorestframework API with representing of possible GET and POST requests to the service and with ability to test them on the main page.
+Also it contains a django management command wich can be run as bash command.
+
+## Diary app
+In Diary app every Diary User have several options how to fill his diary:  
+- create an Entry - it's like note or post with additional features apart from just text: user can add an image and audio and some tags to the Entry
+  For Entry user can select pre-defined EntryCategory and several EntryTag.
+- create a Journey - it's like a story of some trip with text description and linking some countries
+  For Journey user can select pre-defined JourneyType and several JourneyCountry.
+- pass different Polls (QuestionsGroups) - it's like sets of questions with some choices for the answer and calculating total score
+  For every pre-defined Question in pre-defined QuestionsGroup (Poll) user can select answer from pre-defined Choices and then it will be saved as UserAnswer.  
+  It is assumed that user answer to all questions of some Poll on the client side and then all his answers sending to API as POST request.  
+  Then it will be saved as UserCompletedPoll model and all UserAswers model connected to this UserCompletedPoll.  
+  But also there is ann ability to add just one UserAswers via POST request, so then before it you should create UserCompletedPoll for this QuestionsGroup as like mark that this exact User starts competing this exact Poll, but not finished yet. And then all UserAnswers will be carefully attached to one UserCompletedPoll object.
+- also every Diary User have a UserTimeline which can be fill with different Events
+  For adding TimelineEvent user should choose category from pre-defined TimelineEventCategory and then select one of pre-defined TimelineEventTemplate connected to this category.  
+  It is assumed that TimelineEventCategory and TimelineEventTemplate it's a depending DropDownLists on client side.  
+  But user can edit Template text and add Event with some custom data not necessary equal Template.
+  Also for Event user can add any Description and Link as text and also an Emotion - also as text, but it's assumed that on client side it's a pickable choosing from pre-defined list of const smiles.
+  - for every TimelineEvent user can add TimelineEventReaction
+    For adding TimelineEventReaction user should choose category from pre-defined TimelineEventReactionCategory and also add some text data for Reaction, Description and Emotion - also as text, but it's assumed that on client side it's a pickable choosing from pre-defined list of const smiles.
+  - there is an API endpoint for Editing UserTimelineEvent
+    It is assumed that on client side Editing TimelineEvent will be also with depending DropDownLists for changing TimelineEventCategory and TimelineEventTemplate.  
+    For that purpose there is an endpoint `/api/get_tl_event_cats_with_templates` which for exact event_id respond with list of Categories where first category - it's a current choosen for this event (so it will appear as "choosen" in DroipDownList) and with list of Templates where first template - it's a current choosen for this event (so it will appear as "choosen" in DroipDownList)
+  - there is an API endpoint for Deleting UserTimelineEvent
+  - also on UserTimeline will appear automatic Events like "Registration in App" or "Passed some Poll" with Category "App Achivements" 
+
+
+## Commands
 
 python manage.py makemigrations - then will be created sqlite3 DB (diary_app_db.sqlite3) and then will be created migrations for tables in DB for this app (according to models.py file)
 
