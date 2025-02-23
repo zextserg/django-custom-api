@@ -65,7 +65,7 @@ For using and testing all REST API endpoints - before it Admin should insert sev
 Here is a list what should be done and with such exact values - then All examples in REST API endpoints descriptions will work.  
 But if don't want to test these API examples - you don't need to make this initial insert into DB.  
 You can insert your own values and start using service with them.  
-One more time - this script insert first values only for the reason that REST API examples will not throw errors if you try them as described in each enndpoint.  
+One more time - this script insert first values only for the reason that REST API examples will not throw errors if you try them as described in each endpoint.  
 
 For inserting all needed values you have 2 options:  
 - you can use already existing script "initial_admin_insert_into_database.py" ([here](diary/management/commands/initial_admin_insert_into_database.py)).  
