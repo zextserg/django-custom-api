@@ -129,7 +129,7 @@ Using POST API endpoints Diary User can interact with service and he can create 
 - create Entry with image/audio using base64 encoded string values  
   Then base64 values will be converted to binary and saved in DB as BinaryField.  
   Admin can see or listen actual image/audio in Django Admin section.  
-  In API Example there are base64 examples of real image and audion, but very small ones, for not disturb viewving with very long base64 strings on the page.  
+  In API Example there are base64 examples of real image and audion, but very small ones, for not disturb viewing with very long base64 strings on the page.  
 - create Journey with list of Countries
 - create User Answers, User Completed Polls  or both at the same endpoint `add_user_answers_with_cp`
 - create User Timeline  (basicly it will be auto-created when Diary User is creating)
@@ -154,4 +154,9 @@ There is an example of Django Management Command script - it's for inserting fir
 `python manage.py initial_admin_insert_into_database`
 
 
-
+## Main CONSTs and code features
+In the code you can also find some usefull features, like:
+- All APIs with their descriptions, examples, etc are defined in [/diary/views.py](diary/views.py) file as CONST (API_SCHEMA)[diary/views.py#L20]
+- There is REST framework Custom Exception Handler in the same views.py file [custom_exception_handler](diary/views.py#L1025) and it's also mentioned in settings.py file ([here](main_configs/settings.py#L104)) - it's for viewing proper Description and Example on the POST endpoints pages instead of default "Method not Allowed" Error
+- There is custom wraper for automate different endpoints functions DocStrings [docstring_setup](diary/views.py#L1013)
+- There are 2 unificated functions (common_get_func)[diary/views.py#L1042] and (common_post_func)[diary/views.py#L1610] for similar endpoints which uses another wraper (func_name_defining)[diary/views.py#L1004]  for get info about Model and Serializer from API_SCHEMA
