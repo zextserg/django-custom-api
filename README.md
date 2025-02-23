@@ -35,13 +35,13 @@ In Diary app every Diary User have several options how to fill his diary:
 For succesfull running and testing all Examples in API you should make connection to some Database and create tables in it according to Migrations file and also fill these tables with first values nedded for proper work of examples requests.  
 
 ###  connection to DB
-connection to database should be configured in main_settings dir in settings.py file ([here](main/main_configs/settings.py#L62)). 
+connection to database should be configured in main_settings dir in settings.py file ([here](main_configs/settings.py#L62)). 
   
 By default it is connected to SQLite3 database which will be named "diary_app_db.sqlite3".  
 Here you can edit it and connect to some other, like Postgres.
 
 ### making migrations
-The project already contains a migrations file "001_initial.py" in "/diary/migrations" dir ([here](diary/migrations/0001_initial.py).  
+The project already contains a migrations file "001_initial.py" in "/diary/migrations" dir ([here](diary/migrations/0001_initial.py)).  
 
 So basicly all you need - is run in terminal command:  
 `python manage.py migrate`  
@@ -49,7 +49,7 @@ and then will be created sqlite3 DB (diary_app_db.sqlite3) and then will be crea
 
 But if for some reason you want re-create migrations file or don't want to use existing - just run command:  
 `python manage.py makemigrations`  
-and then will be created sqlite3 DB (diary_app_db.sqlite3) and then will be created migrations for tables in DB for this app (according to models.py file) - you will see the appered file in "/diary/migrations" dir ([here](diary/migrations/)
+and then will be created sqlite3 DB (diary_app_db.sqlite3) and then will be created migrations for tables in DB for this app (according to models.py file) - you will see the appered file in "/diary/migrations" dir ([here](diary/migrations/))
 
 ### Runing app for the first time
 After creating all tables in DB you need to create a SuperUser for Django Admin section. For that just run in terminal command:  
