@@ -85,7 +85,7 @@ For inserting all needed values you have 2 options:
     {"name": "France", "lang": "french", "flag": "🇫🇷"}  
   - insert into **Questions groups** 1 value:  
     {"group_name": "Group1", "max_score": 25, "result_types": {"good": [0,13], "bad": [14,25]}}  
-    with **QuestionGroup** also will be inserted first values for **Timeline event categories** with values (the code of this is [here](diary/models.py#L28)):
+    with **QuestionGroup** also will be inserted first values for **Timeline event categories** with values (the code of this is [here](diary/models.py#L28)):  
     {"id": 1, "category_name": "App Achievements"}  
   - insert into **Questions** 2 values:  
     {"question_text": "Is this question awesome?", "order": 1, "questions_group": 1} (without any choices)  
