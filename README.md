@@ -85,17 +85,17 @@ For inserting all needed values you have 2 options:
     {"name": "France", "lang": "french", "flag": "🇫🇷"}  
   - insert into **Questions groups** 1 value:  
     {"group_name": "Group1", "max_score": 25, "result_types": {"good": [0,13], "bad": [14,25]}}  
-    with QuestionGroup also will be inserted first values for **Timeline event categories** with values:
+    with **QuestionGroup** also will be inserted first values for **Timeline event categories** with values:
     {"id": 1, "category_name": "App Achievements"}  
   - insert into **Questions** 2 values:  
     {"question_text": "Is this question awesome?", "order": 1, "questions_group": 1} (without any choices)  
     {"question_text": "Another question is better?", "order": 2, "questions_group": 1} (without any choices)  
   - insert into **Choices** 2 values:  
-    {"choice_text": "Yes, it**s awesome!", "order": 1, "question": [1, 2]}  
-    {"choice_text": "No, it**s even better!", "order": 2, "question": [1, 2]}  
+    {"choice_text": "Yes, it's awesome!", "order": 1, "question": [1, 2]}  
+    {"choice_text": "No, it's even better!", "order": 2, "question": [1, 2]}  
   - insert into **Timeline event categories** 1 value:  
     {"category_name": "Good Events"}  
-    this value will not be first, but second, because first value was inserted with **QuestionGroup** (above). So this value will be with id = 2  
+    this value will not be first, but second, because first value was inserted with **QuestionGroup** (above). So this value will be with id=2  
   - insert into **Timeline event templates** 1 value:  
     {"event": "Some Good Event", "event_category": 2}  
     in these values we set event_category = 2 because it's first meaningful **EventCategory** and **EventCategory** with id = 1 was technical "App Achievements"  
