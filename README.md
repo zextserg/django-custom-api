@@ -123,8 +123,8 @@ On the Page of some POST Endpoint you can find a placeholder at the bottom - her
 Using POST API endpoints Diary User can interact with service and he can create from client side:  
 - create Diary user (some sort of Registration in service, but very basic and insecure, just for test)  
   for each Diary User will be created also:  
-  - new User Timeline for that user (the code of this is (here)[diary/views.py#L1685]))
-  - new User Timeline Event on the Timeline for that new user (the code of this is (here)[diary/views.py#L1702]))  
+  - new User Timeline for that user (the code of this is [here](diary/views.py#L1685)
+  - new User Timeline Event on the Timeline for that new user (the code of this is [here](diary/views.py#L1685))  
     (event: "Registration in app" with category: "App Achievements")   
 - create Entry with image/audio using base64 encoded string values  
   Then base64 values will be converted to binary and saved in DB as BinaryField.  
@@ -156,7 +156,7 @@ There is an example of Django Management Command script - it's for inserting fir
 
 ## Main CONSTs and code features
 In the code you can also find some usefull features, like:
-- All APIs with their descriptions, examples, etc are defined in [/diary/views.py](diary/views.py) file as CONST (API_SCHEMA)[diary/views.py#L20]
+- All APIs with their descriptions, examples, etc are defined in [/diary/views.py](diary/views.py) file as CONST [API_SCHEMA](diary/views.py#L20)
 - There is REST framework Custom Exception Handler in the same views.py file [custom_exception_handler](diary/views.py#L1025) and it's also mentioned in settings.py file ([here](main_configs/settings.py#L104)) - it's for viewing proper Description and Example on the POST endpoints pages instead of default "Method not Allowed" Error
-- There is custom wraper for automate different endpoints functions DocStrings [docstring_setup](diary/views.py#L1013)
-- There are 2 unificated functions (common_get_func)[diary/views.py#L1042] and (common_post_func)[diary/views.py#L1610] for similar endpoints which uses another wraper (func_name_defining)[diary/views.py#L1004]  for get info about Model and Serializer from API_SCHEMA
+- There is custom wraper for automate different endpoints functions DocStrings (docstring_setup](diary/views.py#L1013)
+- There are 2 unificated functions [common_get_func](diary/views.py#L1042) and [common_post_func](diary/views.py#L1610) for similar endpoints which uses another wraper [func_name_defining](diary/views.py#L1004)  for get info about Model and Serializer from API_SCHEMA
