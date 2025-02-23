@@ -1,10 +1,11 @@
 # Django with custom Admin section and REST framework API
 
 ## Description
-It's a classic Django app for some "Diary" service, but with useful customisation for different use cases.  
-In django Admin section it's for example - managing Many-To-Many relations in different ways, ability to Upload image/audio files through admin UI or through POST request as base64 value, and then ability to show images or listen audios in admin management system.  
-It's contains a djangorestframework API with representing of possible GET and POST requests to the service and with ability to test them on the main page.  
-Also it contains a django management command wich can be run as bash command.  
+It's a classic Django app for some "Diary" service, but with useful customisation for different use cases:    
+- in django Admin section it's for example - managing Many-To-Many relations in different ways
+- ability to Upload image/audio files through admin UI or through POST request as base64 value, and then ability to show images or listen audios in admin section  
+- it contains a djangorestframework API with representing of possible GET and POST requests to the service and with ability to test them on the main page  
+- also it contains a django management command wich can be run as bash command  
 
 ## Diary app
 In Diary app every **Diary User** have several options how to fill his diary:  
@@ -119,15 +120,15 @@ Here is view of main page:
 On the Page of some POST Endpoint you can find a placeholder at the bottom - here you can insert an Example JSON from description and test the exact request with this data using Button "POST" underneath it:  
 <img width="873" alt="django_api_post_example" src="https://github.com/user-attachments/assets/12e8e0d2-a79c-468a-885d-6f7d2fe58b0c" />
 
-Using POST API endpoints Diary User can interact with service and he can create from client side: 
-- create Diary user (some sort of Registration in service, but very basic and insecure, just for test)
-  for each Diary User will be created also:
+Using POST API endpoints Diary User can interact with service and he can create from client side:  
+- create Diary user (some sort of Registration in service, but very basic and insecure, just for test)  
+  for each Diary User will be created also:  
   - new User Timeline for that user
-  - new User Timeline Event on the Timeline for that new user
+  - new User Timeline Event on the Timeline for that new user  
     (event: "Registration in app" with category: "App Achievements")   
-- create Entry with image/audio using base64 encoded string values
-  Then base64 values will be converted to binary and saved in DB as BinaryField.
-  Admin can see or listen actual image/audio in Django Admin section.
+- create Entry with image/audio using base64 encoded string values  
+  Then base64 values will be converted to binary and saved in DB as BinaryField.  
+  Admin can see or listen actual image/audio in Django Admin section.  
   In API Example there are base64 examples of real image and audion, but very small ones, for not disturb viewving with very long base64 strings on the page.  
 - create Journey with list of Countries
 - create User Answers, User Completed Polls  or both at the same endpoint `add_user_answers_with_cp`
@@ -139,17 +140,17 @@ Using POST API endpoints Diary User can interact with service and he can create 
 From Django Admin UI with SuperUser you can see all data in all models and also add any data to any models.  
 There are several usecase features:
 - Management of Many-To-Many relation between 2 models are implemented in 2 different views:
-  - one is using available/choosen placeholders:
-    <img width="1437" alt="django_many_to_many" src="https://github.com/user-attachments/assets/fe397ded-3982-483f-9484-b9505433be0b" />
+  - one is using available/choosen placeholders:  
+    <img width="1437" alt="django_many_to_many" src="https://github.com/user-attachments/assets/fe397ded-3982-483f-9484-b9505433be0b" />  
   - another is using classic approach with one placeholder with contex dropdown, you can see example of it in Adding Entry below with EntryTag field:
-- Uploading image/audio using "Browse Files" button in Adding Entry page, then it will be converted to binary and saved in DB as BinaryField:
-  (also here you can see other approach of management of Many-To-Many relation in the EntryTag field)
-  <img width="685" alt="django_upload_file" src="https://github.com/user-attachments/assets/caee0e01-689f-4797-8328-f403d7e25ece" />
-- Ability to show and listen image/audio on the Entry model page - for audio there is a small inline player:
-  <img width="1424" alt="django_show_listen_ui" src="https://github.com/user-attachments/assets/8e8faa4f-cb0e-49a8-803d-60bd8b145153" />
+- Uploading image/audio using "Browse Files" button in Adding Entry page, then it will be converted to binary and saved in DB as BinaryField:  
+  (also here you can see other approach of management of Many-To-Many relation in the EntryTag field)  
+  <img width="685" alt="django_upload_file" src="https://github.com/user-attachments/assets/caee0e01-689f-4797-8328-f403d7e25ece" />  
+- Ability to show and listen image/audio on the Entry model page - for audio there is a small inline player:  
+  <img width="1424" alt="django_show_listen_ui" src="https://github.com/user-attachments/assets/8e8faa4f-cb0e-49a8-803d-60bd8b145153" />  
 
 ## Django Management Command
-There is an example of Django Management Command script - it's for inserting first needed values into DB, but also it shows the way how to create scripts which can be run with defauld django command in terminal:  
+There is an example of Django Management Command script - it's for inserting first needed values into DB, but also it shows the way how to create scripts which can be run with default django command in terminal:  
 `python manage.py initial_admin_insert_into_database`
 
 
