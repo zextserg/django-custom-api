@@ -60,6 +60,48 @@ After creating SuperUser you can finally Run the App with command in terminal:
 `python manage.py runserver`  
 
 ### Inserting initial data into DB
+For using and testing all REST API endpoints - before it Admin should insert several first values to some tables in DB.  
+Here is a list what should be done and with such exact values - then All examples in REST API endpoints descriptions will work.  
+But if don't want to test these API examples - you don't need to make this initial insert into DB.  
+You can insert your own values and start using service with them.  
+One more time - this script insert first values only for the reason that REST API examples will not throw errors if you try them as described in each enndpoint.  
+
+For inserting all needed values you have 2 options:  
+- you can use already existing script "initial_admin_insert_into_database.py" ([here](diary/management/commands/initial_admin_insert_into_database.py)).  
+  It was created as DjangoManagementCommand, so you can run it as command in terminal:  
+  `python manage.py initial_admin_insert_into_database`  
+  and then it will insert all needed values into DB and print the results of inserting (or errors) in terminal.  
+- you can add all needed values manualy in Admin section (http://127.0.0.1/admin).
+  So here is a list which values for which models you need to add as Admin:
+  - insert into **Entry Categories** 1 value:  
+    {"name": "Notes"}
+  - insert into **Entry Tags** 2 values:  
+    {"name": "note"}, {"name": "long-read"}
+  - insert into **Journey Types** 1 value:  
+    {"name": "just for weekend"}
+  - insert into **Journey Countries** 2 values:  
+    {"name": "United Kingdome", "lang": "english", "flag": "🇬🇧"}   
+    {"name": "France", "lang": "french", "flag": "🇫🇷"}  
+  - insert into **Questions groups** 1 value:  
+    {"group_name": "Group1", "max_score": 25, "result_types": {"good": [0,13], "bad": [14,25]}}  
+    with QuestionGroup also will be inserted first values for **Timeline event categories** with values:
+    {"id": 1, "category_name": "App Achievements"}  
+  - insert into **Questions** 2 values:  
+    {"question_text": "Is this question awesome?", "order": 1, "questions_group": 1} (without any choices)  
+    {"question_text": "Another question is better?", "order": 2, "questions_group": 1} (without any choices)  
+  - insert into **Choices** 2 values:  
+    {"choice_text": "Yes, it**s awesome!", "order": 1, "question": [1, 2]}  
+    {"choice_text": "No, it**s even better!", "order": 2, "question": [1, 2]}  
+  - insert into **Timeline event categories** 1 value:  
+    {"category_name": "Good Events"}  
+    this value will not be first, but second, because first value was inserted with **QuestionGroup** (above). So this value will be with id = 2  
+  - insert into **Timeline event templates** 1 value:  
+    {"event": "Some Good Event", "event_category": 2}  
+    in these values we set event_category = 2 because it's first meaningful **EventCategory** and **EventCategory** with id = 1 was technical "App Achievements"  
+  - insert into **Timeline event reaction category** 1 value:  
+    {"category_name": "Happy reactions"}  
+
+
 Admin create:
 - Entry Categories - {"Name": "Notes"}
 - Entry Tags - [{"Name": "Notes"}, {"Name": "long-read"}]
