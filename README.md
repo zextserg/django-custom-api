@@ -31,15 +31,35 @@ In Diary app every Diary User have several options how to fill his diary:
   - also on UserTimeline will appear automatic Events like "Registration in App" or "Passed some Poll" with Category "App Achivements" 
 
 
-## Commands
+## Run and test
+For succesfull running and testing all Examples in API you should make connection to some Database and create tables in it according to Migrations file and also fill these tables with first values nedded for proper work of examples requests.  
 
-python manage.py makemigrations - then will be created sqlite3 DB (diary_app_db.sqlite3) and then will be created migrations for tables in DB for this app (according to models.py file)
+###  connection to DB
+connection to database should be configured in main_settings dir in settings.py file ([here](main/main_configs/settings.py#L62)). 
+  
+By default it is connected to SQLite3 database which will be named "diary_app_db.sqlite3".  
+Here you can edit it and connect to some other, like Postgres.
 
-python manage.py migrate - then will be created tables in DB for this app (according to migrations files) and then will be created internal Django tables in DB (for Auth and Admin sections)
+### making migrations
+The project already contains a migrations file "001_initial.py" in "/diary/migrations" dir ([here](diary/migrations/0001_initial.py).  
 
-python manage.py createsuperuser - creating user for Admin section (on the link 127.0.0.1/admin)
-python manage.py runserver - start using
+So basicly all you need - is run in terminal command:  
+`python manage.py migrate`  
+and then will be created sqlite3 DB (diary_app_db.sqlite3) and then will be created all tables in DB for this app (according to migrations file) and then will be created internal Django tables in DB (for Auth and Admin sections).  
 
+But if for some reason you want re-create migrations file or don't want to use existing - just run command:  
+`python manage.py makemigrations`  
+and then will be created sqlite3 DB (diary_app_db.sqlite3) and then will be created migrations for tables in DB for this app (according to models.py file) - you will see the appered file in "/diary/migrations" dir ([here](diary/migrations/)
+
+### Runing app for the first time
+After creating all tables in DB you need to create a SuperUser for Django Admin section. For that just run in terminal command:  
+`python manage.py createsuperuser`  
+and follow prompt in terminal, then you will be able to access Admin section on the link http://127.0.0.1/admin  
+
+After creating SuperUser you can finally Run the App with command in terminal:  
+`python manage.py runserver`  
+
+### Inserting initial data into DB
 Admin create:
 - Entry Categories - {"Name": "Notes"}
 - Entry Tags - [{"Name": "Notes"}, {"Name": "long-read"}]
