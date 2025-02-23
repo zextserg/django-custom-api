@@ -26,7 +26,7 @@ In Diary app every **Diary User** have several options how to fill his diary:
     For adding **TimelineEventReaction** user should choose category from pre-defined **TimelineEventReactionCategory** and also add some text data for Reaction, Description and Emotion - also as text, but it's assumed that on client side it's a pickable choosing from pre-defined list of const smiles.
   - there is an API endpoint for Editing **UserTimelineEvent**
     It is assumed that on client side Editing **TimelineEvent** will be also with depending DropDownLists for changing **TimelineEventCategory** and **TimelineEventTemplate**.  
-    For that purpose there is an endpoint `/api/get_tl_event_cats_with_templates` which for exact event_id respond with list of **Categories** where first category - it's a current choosen for this event (so it will appear as "choosen" in DroipDownList) and with list of **Templates** where first template - it's a current choosen for this event (so it will appear as "choosen" in DroipDownList)
+    For that purpose there is an endpoint `get_tl_event_cats_with_templates` which for exact event_id respond with list of **Categories** where first category - it's a current choosen for this event (so it will appear as "choosen" in DroipDownList) and with list of **Templates** where first template - it's a current choosen for this event (so it will appear as "choosen" in DroipDownList)
   - there is an API endpoint for Deleting **UserTimelineEvent**
   - also on **UserTimeline** will appear automatic **Events** like "Registration in App" or "Passed some Poll" with Category "App Achivements" 
 
@@ -101,10 +101,10 @@ For inserting all needed values you have 2 options:
   - insert into **Timeline event reaction category** 1 value:  
     {"category_name": "Happy reactions"}  
 
-### REST framework API
+## REST framework API
 From client side this app can receive several GET and POST requests.  
 It was made using lib djangorestframework ([link](https://www.django-rest-framework.org/)).  
-All possible endpoints is shown as dict with links at main page 127.0.0.1/  
+All possible endpoints is shown as dict with links at main page http://127.0.0.1/  
 
 All endpoints divided for 2 Sections:
 - GET API endpoint
@@ -115,15 +115,42 @@ On each link you can open specific Endpoint Page and then will be detailed descr
 Here is view of main page:  
 <img width="1055" alt="api_all_list" src="https://github.com/user-attachments/assets/81850890-f49d-490f-9b73-07c0e02d1e92" />
 
+### Section of POST endpoints
 On the Page of some POST Endpoint you can find a placeholder at the bottom - here you can insert an Example JSON from description and test the exact request with this data using Button "POST" underneath it:  
 <img width="873" alt="django_api_post_example" src="https://github.com/user-attachments/assets/12e8e0d2-a79c-468a-885d-6f7d2fe58b0c" />
 
-API creates via POST:
-- Diary user
-- Entry
-- Journeys
-- Users completed polls
-- Users answers
-- Users timeline event reactions
-- Users timeline events
-- Users timelines
+Using POST API endpoints Diary User can interact with service and he can create from client side: 
+- create Diary user (some sort of Registration in service, but very basic and insecure, just for test)
+  for each Diary User will be created also:
+  - new User Timeline for that user
+  - new User Timeline Event on the Timeline for that new user
+    (event: "Registration in app" with category: "App Achievements")   
+- create Entry with image/audio using base64 encoded string values
+  Then base64 values will be converted to binary and saved in DB as BinaryField.
+  Admin can see or listen actual image/audio in Django Admin section.
+  In API Example there are base64 examples of real image and audion, but very small ones, for not disturb viewving with very long base64 strings on the page.  
+- create Journey with list of Countries
+- create User Answers, User Completed Polls  or both at the same endpoint `add_user_answers_with_cp`
+- create User Timeline  (basicly it will be auto-created when Diary User is creating)
+- create, edit or delete User Timeline Events
+- create User Timeline Event Reactions
+
+## Customised Admin Section
+From Django Admin UI with SuperUser you can see all data in all models and also add any data to any models.  
+There are several usecase features:
+- Management of Many-To-Many relation between 2 models are implemented in 2 different views:
+  - one is using available/choosen placeholders:
+    <img width="1437" alt="django_many_to_many" src="https://github.com/user-attachments/assets/fe397ded-3982-483f-9484-b9505433be0b" />
+  - another is using classic approach with one placeholder with contex dropdown, you can see example of it in Adding Entry below with EntryTag field:
+- Uploading image/audio using "Browse Files" button in Adding Entry page, then it will be converted to binary and saved in DB as BinaryField:
+  (also here you can see other approach of management of Many-To-Many relation in the EntryTag field)
+  <img width="685" alt="django_upload_file" src="https://github.com/user-attachments/assets/caee0e01-689f-4797-8328-f403d7e25ece" />
+- Ability to show and listen image/audio on the Entry model page - for audio there is a small inline player:
+  <img width="1424" alt="django_show_listen_ui" src="https://github.com/user-attachments/assets/8e8faa4f-cb0e-49a8-803d-60bd8b145153" />
+
+## Django Management Command
+There is an example of Django Management Command script - it's for inserting first needed values into DB, but also it shows the way how to create scripts which can be run with defauld django command in terminal:  
+`python manage.py initial_admin_insert_into_database`
+
+
+
