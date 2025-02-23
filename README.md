@@ -7,28 +7,28 @@ It's contains a djangorestframework API with representing of possible GET and PO
 Also it contains a django management command wich can be run as bash command.  
 
 ## Diary app
-In Diary app every Diary User have several options how to fill his diary:  
-- create an Entry - it's like note or post with additional features apart from just text: user can add an image and audio and some tags to the Entry
-  For Entry user can select pre-defined EntryCategory and several EntryTag.
-- create a Journey - it's like a story of some trip with text description and linking some countries
-  For Journey user can select pre-defined JourneyType and several JourneyCountry.
-- pass different Polls (QuestionsGroups) - it's like sets of questions with some choices for the answer and calculating total score
-  For every pre-defined Question in pre-defined QuestionsGroup (Poll) user can select answer from pre-defined Choices and then it will be saved as UserAnswer.  
+In Diary app every **Diary User** have several options how to fill his diary:  
+- create an **Entry** - it's like note or post with additional features apart from just text: user can add an image and audio and some tags to the **Entry**
+  For **Entry** user can select pre-defined **EntryCategory** and several **EntryTag**.
+- create a **Journey** - it's like a story of some trip with text description and linking some countries
+  For **Journey** user can select pre-defined **JourneyType** and several **JourneyCountry**.
+- pass different Polls (**QuestionsGroups**) - it's like sets of questions with some choices for the answer and calculating total score
+  For every pre-defined **Question** in pre-defined **QuestionsGroup** (Poll) user can select answer from pre-defined **Choices** and then it will be saved as **UserAnswer**.  
   It is assumed that user answer to all questions of some Poll on the client side and then all his answers sending to API as POST request.  
-  Then it will be saved as UserCompletedPoll model and all UserAswers model connected to this UserCompletedPoll.  
-  But also there is ann ability to add just one UserAswers via POST request, so then before it you should create UserCompletedPoll for this QuestionsGroup as like mark that this exact User starts competing this exact Poll, but not finished yet. And then all UserAnswers will be carefully attached to one UserCompletedPoll object.
-- also every Diary User have a UserTimeline which can be fill with different Events
-  For adding TimelineEvent user should choose category from pre-defined TimelineEventCategory and then select one of pre-defined TimelineEventTemplate connected to this category.  
-  It is assumed that TimelineEventCategory and TimelineEventTemplate it's a depending DropDownLists on client side.  
-  But user can edit Template text and add Event with some custom data not necessary equal Template.
-  Also for Event user can add any Description and Link as text and also an Emotion - also as text, but it's assumed that on client side it's a pickable choosing from pre-defined list of const smiles.
-  - for every TimelineEvent user can add TimelineEventReaction
-    For adding TimelineEventReaction user should choose category from pre-defined TimelineEventReactionCategory and also add some text data for Reaction, Description and Emotion - also as text, but it's assumed that on client side it's a pickable choosing from pre-defined list of const smiles.
-  - there is an API endpoint for Editing UserTimelineEvent
-    It is assumed that on client side Editing TimelineEvent will be also with depending DropDownLists for changing TimelineEventCategory and TimelineEventTemplate.  
-    For that purpose there is an endpoint `/api/get_tl_event_cats_with_templates` which for exact event_id respond with list of Categories where first category - it's a current choosen for this event (so it will appear as "choosen" in DroipDownList) and with list of Templates where first template - it's a current choosen for this event (so it will appear as "choosen" in DroipDownList)
-  - there is an API endpoint for Deleting UserTimelineEvent
-  - also on UserTimeline will appear automatic Events like "Registration in App" or "Passed some Poll" with Category "App Achivements" 
+  Then it will be saved as **UserCompletedPoll** model and all **UserAswers** model connected to this **UserCompletedPoll**.  
+  But also there is ann ability to add just one **UserAswers** via POST request, so then before it you should create **UserCompletedPoll** for this **QuestionsGroup** as like mark that this exact User starts competing this exact Poll, but not finished yet. And then all **UserAnswers** will be carefully attached to one **UserCompletedPoll** object.
+- also every **Diary User** have a **UserTimeline** which can be fill with different **Events**
+  For adding **TimelineEvent** user should choose category from pre-defined **TimelineEventCategory** and then select one of pre-defined **TimelineEventTemplate** connected to this category.  
+  It is assumed that **TimelineEventCategory** and **TimelineEventTemplate** it's a depending DropDownLists on client side.  
+  But user can edit **Template** text and add **Event** with some custom data not necessary equal **Template**.
+  Also for **Event** user can add any Description and Link as text and also an Emotion - also as text, but it's assumed that on client side it's a pickable choosing from pre-defined list of const smiles.
+  - for every **TimelineEvent** user can add **TimelineEventReaction**
+    For adding **TimelineEventReaction** user should choose category from pre-defined **TimelineEventReactionCategory** and also add some text data for Reaction, Description and Emotion - also as text, but it's assumed that on client side it's a pickable choosing from pre-defined list of const smiles.
+  - there is an API endpoint for Editing **UserTimelineEvent**
+    It is assumed that on client side Editing **TimelineEvent** will be also with depending DropDownLists for changing **TimelineEventCategory** and **TimelineEventTemplate**.  
+    For that purpose there is an endpoint `/api/get_tl_event_cats_with_templates` which for exact event_id respond with list of **Categories** where first category - it's a current choosen for this event (so it will appear as "choosen" in DroipDownList) and with list of **Templates** where first template - it's a current choosen for this event (so it will appear as "choosen" in DroipDownList)
+  - there is an API endpoint for Deleting **UserTimelineEvent**
+  - also on **UserTimeline** will appear automatic **Events** like "Registration in App" or "Passed some Poll" with Category "App Achivements" 
 
 
 ## Run and test
@@ -101,29 +101,22 @@ For inserting all needed values you have 2 options:
   - insert into **Timeline event reaction category** 1 value:  
     {"category_name": "Happy reactions"}  
 
+### REST framework API
+From client side this app can receive several GET and POST requests.  
+It was made using lib djangorestframework ([link](https://www.django-rest-framework.org/)).  
+All possible endpoints is shown as dict with links at main page 127.0.0.1/  
 
-Admin create:
-- Entry Categories - {"Name": "Notes"}
-- Entry Tags - [{"Name": "Notes"}, {"Name": "long-read"}]
-- Journey Types - {"Name": "just for weekend"}
-- Journey Countries - [
-    {"Name": "United Kingdome", "Lang": "english", "Flag": "🇬🇧"},
-    {"Name": "France", "Lang": "french", "Flag": "🇫🇷"},
-]
-- Questions groups - {"Group name": "Group1", "Max score": 25, "Result_types": {"good": [0,13], "bad": [14,25]}}
-- Choices - [
-    {"Choice text": "Yes, it's awesome!", "Order": 1} (without any question),
-    {"Choice text": "No, it's even better!", "Order": 2} (without any question),
-]
-- Questions - [
-    {"Question text": "Is this question awesome?", "Order": 1} 
-    (with Question_group = "Group1" and choice = "Yes, it's awesome!"), 
-    {"Question text": "Another question is better?", "Order": 2} 
-    (with Question_group = "Group1" and choice = "No, it's even better!")
-]
-- Timeline event categorys - {"Category name": "Good Events"}
-- Timeline event templates - {"Event": "Some Good Event"} (in cat = "Good Events")
-- Timeline event reaction category - {"Category name": "Happy reactions"}
+All endpoints divided for 2 Sections:
+- GET API endpoint
+- POST API endpoints  
+
+On each link you can open specific Endpoint Page and then will be detailed description what's can be done with this Endpoint, which params can be set and there will be Example link for testing in GET endpoints and Example JSON data for testing POST endpoints.  
+
+Here is view of main page:  
+<img width="1055" alt="api_all_list" src="https://github.com/user-attachments/assets/81850890-f49d-490f-9b73-07c0e02d1e92" />
+
+On the Page of some POST Endpoint you can find a placeholder at the bottom - here you can insert an Example JSON from description and test the exact request with this data using Button "POST" underneath it:  
+<img width="873" alt="django_api_post_example" src="https://github.com/user-attachments/assets/12e8e0d2-a79c-468a-885d-6f7d2fe58b0c" />
 
 API creates via POST:
 - Diary user
